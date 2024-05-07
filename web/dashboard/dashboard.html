@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="dashboard.css" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <h1>Welcome to Your Dashboard</h1>
+      <p>Hello <span id="user-name"></span>!</p>
+      <p>Current Date and Time: <span id="current-time"></span></p>
+      <button id="sign-out-button">Sign Out</button>
+    </div>
+    <script>
+      const loggedInUserEmail = localStorage.getItem("loggedInUser");
+      const userData = JSON.parse(localStorage.getItem("users")) || [];
+      const userNameElement = document.getElementById("user-name");
+      const currentTimeElement = document.getElementById("current-time");
+
+      if (loggedInUserEmail) {
+        const loggedInUser = userData.find((user) => user.email === loggedInUserEmail);
+
+        if (loggedInUser) {
+          // Display user's info on the dashboard
+          userNameElement.textContent = loggedInUser.firstname;
+
+          // Update current date and time
+          const currentDate = new Date();
+          const options = {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit",
+          };
+          currentTimeElement.textContent = currentDate.toLocaleString("en-US", options);
+          // Use loggedInUser to show user-specific information
+        } else {
+          alert("here");
+          // If loggedInUser is not found, redirect to login page
+          window.location.href = "../login/login.html";
+        }
+      } else {
+        // Redirect to login page if loggedInUser is not set
+        window.location.href = "../login/login.html";
+      }
+
+      const signOutButton = document.getElementById("sign-out-button");
+
+      signOutButton.addEventListener("click", function () {
+        // Remove loggedInUser property from localStorage
+        localStorage.removeItem("loggedInUser");
+        // Redirect to login page
+        window.location.href = "../login/login.html";
+      });
+    </script>
+  </body>
+</html>

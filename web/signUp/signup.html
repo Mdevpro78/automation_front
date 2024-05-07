@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="signup.css" />
+    <title>Sign Up Page</title>
+  </head>
+  <body>
+    <div class="signup-container">
+      <h1>Sign Up</h1>
+      <form id="signup-form">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="text" id="firstname" placeholder="First Name" required />
+        <input type="text" id="lastname" placeholder="Last Name" required />
+        <input type="date" id="birthdate" required />
+        <input type="tel" id="phone" placeholder="Phone Number" required />
+        <input type="password" id="password" placeholder="Password" required />
+        <input type="password" id="password-confirm" placeholder="Confirm Password" required />
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
+    <script>
+      // Check if the user is already logged in
+      const loggedInUserEmail = localStorage.getItem("loggedInUser");
+      if (loggedInUserEmail) {
+        // Redirect to the dashboard page
+        window.location.href = "../dashboard/dashboard.html";
+      }
+      // signup-script.js
+      const signupForm = document.getElementById("signup-form");
+
+      signupForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const email = document.getElementById("email").value;
+        const firstname = document.getElementById("firstname").value;
+        const lastname = document.getElementById("lastname").value;
+        const birthdate = document.getElementById("birthdate").value;
+        const phone = document.getElementById("phone").value;
+        const password = document.getElementById("password").value;
+        const passwordConfirm = document.getElementById("password-confirm").value;
+
+        if (password !== passwordConfirm) {
+          alert("Passwords do not match!");
+          return;
+        }
+
+        // Additional validation checks can be added here
+
+        const newUser = {
+          email,
+          firstname,
+          lastname,
+          birthdate,
+          phone,
+          password,
+        };
+
+        // Retrieve existing users from localStorage
+        const users = JSON.parse(localStorage.getItem("users")) || [];
+
+        // Add the new user to the array
+        users.push(newUser);
+
+        // Save the updated user array back to localStorage
+        localStorage.setItem("users", JSON.stringify(users));
+
+        alert("Sign up successful!");
+
+        // Redirect to login page
+        window.location.href = "../login/login.html";
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="login.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <h1>Login</h1>
+      <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required />
+        <input type="password" id="login-password" placeholder="Password" required />
+        <button type="submit">Log In</button>
+      </form>
+      <p>Don't have an account? <a href="../signUp/signup.html">Sign Up</a></p>
+    </div>
+  </body>
+</html>
+<script>
+  const loginForm = document.getElementById("login-form");
+  // Check if the user is already logged in
+  const loggedInUserEmail = localStorage.getItem("loggedInUser");
+  if (loggedInUserEmail) {
+    // Redirect to the dashboard page
+    window.location.href = "../dashboard/dashboard.html";
+  }
+
+  loginForm.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const loginEmail = document.getElementById("login-email").value;
+    const loginPassword = document.getElementById("login-password").value;
+
+    // Retrieve users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const loggedInUser = users.find((user) => user.email === loginEmail && user.password === loginPassword);
+
+    if (loggedInUser) {
+      alert("Login successful!");
+
+      // Store the loggedInUser property in localStorage
+      localStorage.setItem("loggedInUser", loggedInUser.email);
+
+      // Redirect to dashboard page
+      window.location.href = "../dashboard/dashboard.html";
+    } else {
+      alert("Login failed. Please check your email and password.");
+    }
+  });
+</script>
