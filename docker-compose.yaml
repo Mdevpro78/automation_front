@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  web:
+    container_name: web
+    build:
+      context: .
+      dockerfile: ./Dockerfile.web
+    restart: always
+    hostname: web
+    volumes:
+      - ./web:/usr/share/nginx/html
+
+  cypress:
+    image: cypress/included:12.3.0
+    container_name: cypress
+    restart: always
+    hostname: cypress
+    stdin_open: true
+    tty: true
+    environment:
+      - CYPRESS_baseUrl=http://web:80
+    depends_on:
+      - web
+    volumes:
+      - ./cypress:/cypress
+      - ./cypress.config.js:/cypress.config.js
+    working_dir: /
+    entrypoint:
+      - cypress
+    command: ["run", "--browser", "chrome"]
