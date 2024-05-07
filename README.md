@@ -33,9 +33,11 @@
 - cypress.config.js: cypress فایل مربوط به کانفیک
 - Dockerfile.web: web فایل ایمیج داکر مربوط به سرویس
 - docker-compose.yaml: web, cypress فایل شامل سرویس‌های
-
 </div>
 
+<h6 dir="rtl" align="right"> 
+<a href="https://github.com/Mdevpro78/automation_front/blob/master/docs/gherkin_scenarios.pdf" dir="rtl" align="right">   دانلود سناریو‌های تست </a>
+</h6>
 ## 🏁 Getting Started
 
 <div dir="auto" align="justify"> 
