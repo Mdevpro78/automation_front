@@ -38,6 +38,7 @@
 <h6 dir="rtl" align="right"> 
 <a href="https://github.com/Mdevpro78/automation_front/blob/master/docs/gherkin_scenarios.pdf" dir="rtl" align="right">   دانلود سناریو‌های تست </a>
 </h6>
+
 ## 🏁 Getting Started
 
 <div dir="auto" align="justify"> 
